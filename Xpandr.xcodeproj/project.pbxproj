@@ -13,6 +13,8 @@
 		92D7D6201B98128D00AD9BC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D61F1B98128D00AD9BC9 /* Images.xcassets */; };
 		92D7D6231B98128D00AD9BC9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D6211B98128D00AD9BC9 /* LaunchScreen.xib */; };
 		92D7D62F1B98128D00AD9BC9 /* XpandrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */; };
+		92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6381B9815D100AD9BC9 /* TableViewController.swift */; };
+		92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		92D7D6281B98128D00AD9BC9 /* XpandrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XpandrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D62D1B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XpandrTests.swift; sourceTree = "<group>"; };
+		92D7D6381B9815D100AD9BC9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAExpandAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,10 +82,10 @@
 			isa = PBXGroup;
 			children = (
 				92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */,
+				92D7D6381B9815D100AD9BC9 /* TableViewController.swift */,
 				92D7D61A1B98128D00AD9BC9 /* ViewController.swift */,
+				92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */,
 				92D7D61C1B98128D00AD9BC9 /* Main.storyboard */,
-				92D7D61F1B98128D00AD9BC9 /* Images.xcassets */,
-				92D7D6211B98128D00AD9BC9 /* LaunchScreen.xib */,
 				92D7D6161B98128D00AD9BC9 /* Supporting Files */,
 			);
 			path = Xpandr;
@@ -90,6 +94,8 @@
 		92D7D6161B98128D00AD9BC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				92D7D61F1B98128D00AD9BC9 /* Images.xcassets */,
+				92D7D6211B98128D00AD9BC9 /* LaunchScreen.xib */,
 				92D7D6171B98128D00AD9BC9 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -213,7 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */,
+				92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */,
 				92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */,
+				92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

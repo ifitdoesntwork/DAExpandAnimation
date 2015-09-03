@@ -14,14 +14,19 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         static let SystemAnimationDuration = 0.24
     }
     
+    // Update fromViewController (the controller that is visible in the beginning of the transition) alongside the transition.
     var fromViewAnimationsAdapter: DAExpandAnimationFromViewAnimationsAdapter?
     
+    // Update toViewController (the controller that is visible at the end of a completed transition) alongside the transition.
     var toViewAnimationsAdapter: DAExpandAnimationToViewAnimationsAdapter?
     
+    // Frame of the view to expand in fromView coordinates. Requires the current frame to deal with view size changes.
     var collapsedViewFrame: (() -> CGRect)?
     
+    // Desired final frame for the view. When it is set to nil the view covers the whole window.
     var expandedViewFrame: CGRect?
     
+    // Default animation duration is an approximation of the system modal view presentation duration.
     var animationDuration = Constants.SystemAnimationDuration
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
@@ -52,31 +57,31 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         }
         
         // Create the sliding views and add them to the scene.
-        let backgroundController = isPresentation ? fromViewController : toViewController
+        let backgroundViewController = isPresentation ? fromViewController : toViewController
         let topSlidingViewFrame = CGRect(
-            x: backgroundController.view.bounds.origin.x,
-            y: backgroundController.view.bounds.origin.y,
+            x: backgroundViewController.view.bounds.origin.x,
+            y: backgroundViewController.view.bounds.origin.y,
             width: collapsedFrame.width,
             height: collapsedFrame.origin.y
         )
-        let topSlidingView = backgroundController.view.resizableSnapshotViewFromRect(
+        let topSlidingView = backgroundViewController.view.resizableSnapshotViewFromRect(
             topSlidingViewFrame,
             afterScreenUpdates: false,
             withCapInsets: UIEdgeInsetsZero
         )
         let bottomViewOriginY = collapsedFrame.maxY
         var bottomSlidingViewFrame = CGRect(
-            x: backgroundController.view.bounds.origin.x,
-            y: backgroundController.view.bounds.origin.y + bottomViewOriginY,
+            x: backgroundViewController.view.bounds.origin.x,
+            y: backgroundViewController.view.bounds.origin.y + bottomViewOriginY,
             width: collapsedFrame.width,
             height: inView.bounds.height - bottomViewOriginY
         )
-        let bottomSlidingView = backgroundController.view.resizableSnapshotViewFromRect(
+        let bottomSlidingView = backgroundViewController.view.resizableSnapshotViewFromRect(
             bottomSlidingViewFrame,
             afterScreenUpdates: false,
             withCapInsets: UIEdgeInsetsZero
         )
-        bottomSlidingViewFrame.origin.y -= backgroundController.view.bounds.origin.y
+        bottomSlidingViewFrame.origin.y -= backgroundViewController.view.bounds.origin.y
         bottomSlidingView.frame = bottomSlidingViewFrame
         let topSlidingDistance = collapsedFrame.origin.y
         let bottomSlidingDistance = inView.bounds.height - collapsedFrame.height - topSlidingDistance

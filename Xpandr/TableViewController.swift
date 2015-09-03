@@ -22,7 +22,7 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
             .magentaColor(),
             .brownColor()
         ]
-        static let DemoAnimationDuration = 2.0
+        static let DemoAnimationDuration = 1.0
     }
 
     // MARK: - Table view data source

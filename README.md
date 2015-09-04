@@ -6,6 +6,7 @@ A custom modal transition that presents a controller with an expanding effect wh
 Simply copy the ```Xpandr/DAExpandAnimation.swift``` file into your project.
 # Usage
 Try the example project!
+Have your view controller conform to UIViewControllerTransitioningDelegate. Optionally set the ```collapsedViewFrame```, ```the expandedViewFrame``` and the ```animationDuration```.
 #MIT License
 
 	Copyright (c) 2015 Denis Avdeev. All rights reserved.

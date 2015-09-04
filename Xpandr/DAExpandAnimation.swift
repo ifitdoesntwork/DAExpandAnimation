@@ -1,9 +1,26 @@
 //
 //  DAExpandAnimation.swift
-//  Xpandr
 //
-//  Created by Denis Avdeev on 03.09.15.
 //  Copyright (c) 2015 Denis Avdeev. All rights reserved.
+//        
+//  Permission is hereby granted, free of charge, to any person obtaining a
+//  copy of this software and associated documentation files (the "Software"),
+//  to deal in the Software without restriction, including
+//  without limitation the rights to use, copy, modify, merge, publish,
+//  distribute, sublicense, and/or sell copies of the Software, and to
+//  permit persons to whom the Software is furnished to do so, subject to
+//  the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included
+//  in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+//  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+//  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+//  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+//  CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+//  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+//  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
 import UIKit
@@ -20,10 +37,10 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     // Update toViewController (the controller that is visible at the end of a completed transition) alongside the transition.
     var toViewAnimationsAdapter: DAExpandAnimationToViewAnimationsAdapter?
     
-    // Frame of the view to expand in fromView coordinates. Requires the current frame to deal with view size changes.
+    // Frame of the view to expand in presenter's view coordinates. Requires the current frame to deal with view size changes.
     var collapsedViewFrame: (() -> CGRect)?
     
-    // Desired final frame for the view. When it is set to nil the view covers the whole window.
+    // Desired final frame for the view in the window coordinates. When it is set to nil the view covers the whole window.
     var expandedViewFrame: CGRect?
     
     // Default animation duration is an approximation of the system modal view presentation duration.
@@ -34,76 +51,79 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let inView = transitionContext.containerView()
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
         let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         let isPresentation = toViewController.presentationController?.presentingViewController == fromViewController
+        let backgroundView = (isPresentation ? fromViewController : toViewController).view
+        let frontView = (isPresentation ? toViewController : fromViewController).view
+        let inView = transitionContext.containerView()
         
-        // Set the scene.
-        toView?.layoutIfNeeded()
+        // Figure the ad hoc collapsed and expanded view frames.
+        backgroundView.layoutIfNeeded()
         var collapsedFrame = collapsedViewFrame?() ?? CGRect(
-            x: 0,
-            y: inView.bounds.height / 2,
-            width: inView.bounds.width,
+            x: backgroundView.bounds.origin.x,
+            y: backgroundView.bounds.midY,
+            width: backgroundView.bounds.width,
             height: 0
         )
-        if collapsedFrame.maxY < 0 {
-            collapsedFrame.origin.y = -collapsedFrame.height
+        if collapsedFrame.maxY < backgroundView.bounds.origin.y {
+            collapsedFrame.origin.y = backgroundView.bounds.origin.y - collapsedFrame.height
         }
-        if collapsedFrame.origin.y > inView.bounds.height {
-            collapsedFrame.origin.y = inView.bounds.height
+        if collapsedFrame.origin.y > backgroundView.bounds.maxY {
+            collapsedFrame.origin.y = backgroundView.bounds.maxY
         }
+        let expandedFrame = expandedViewFrame ?? inView.bounds
         
         // Create the sliding views and add them to the scene.
-        let backgroundViewController = isPresentation ? fromViewController : toViewController
-        let topSlidingViewFrame = CGRect(
-            x: backgroundViewController.view.bounds.origin.x,
-            y: backgroundViewController.view.bounds.origin.y,
-            width: collapsedFrame.width,
+        var topSlidingViewFrame = CGRect(
+            x: backgroundView.bounds.origin.x,
+            y: backgroundView.bounds.origin.y,
+            width: backgroundView.bounds.width,
             height: collapsedFrame.origin.y
         )
-        let topSlidingView = backgroundViewController.view.resizableSnapshotViewFromRect(
+        let topSlidingView = backgroundView.resizableSnapshotViewFromRect(
             topSlidingViewFrame,
             afterScreenUpdates: false,
             withCapInsets: UIEdgeInsetsZero
         )
-        let bottomViewOriginY = collapsedFrame.maxY
+        topSlidingView.frame = topSlidingViewFrame
+        
+        let bottomSlidingViewOriginY = collapsedFrame.maxY
         var bottomSlidingViewFrame = CGRect(
-            x: backgroundViewController.view.bounds.origin.x,
-            y: backgroundViewController.view.bounds.origin.y + bottomViewOriginY,
-            width: collapsedFrame.width,
-            height: inView.bounds.height - bottomViewOriginY
+            x: backgroundView.bounds.origin.x,
+            y: bottomSlidingViewOriginY,
+            width: backgroundView.bounds.width,
+            height: backgroundView.bounds.maxY - bottomSlidingViewOriginY
         )
-        let bottomSlidingView = backgroundViewController.view.resizableSnapshotViewFromRect(
+        let bottomSlidingView = backgroundView.resizableSnapshotViewFromRect(
             bottomSlidingViewFrame,
             afterScreenUpdates: false,
             withCapInsets: UIEdgeInsetsZero
         )
-        bottomSlidingViewFrame.origin.y -= backgroundViewController.view.bounds.origin.y
         bottomSlidingView.frame = bottomSlidingViewFrame
-        let topSlidingDistance = collapsedFrame.origin.y
-        let bottomSlidingDistance = inView.bounds.height - collapsedFrame.height - topSlidingDistance
+        
+        let topSlidingDistance = collapsedFrame.origin.y - backgroundView.bounds.origin.y
+        let bottomSlidingDistance = backgroundView.bounds.maxY - collapsedFrame.maxY
         if !isPresentation {
             topSlidingView.center.y -= topSlidingDistance
             bottomSlidingView.center.y += bottomSlidingDistance
         }
+        topSlidingView.frame = backgroundView.convertRect(topSlidingView.frame, toView: inView)
+        bottomSlidingView.frame = backgroundView.convertRect(bottomSlidingView.frame, toView: inView)
         if !(fromViewAnimationsAdapter?.shouldSlideApart == false) {
             inView.addSubview(topSlidingView)
             inView.addSubview(bottomSlidingView)
         }
         
         // Add the expanding view to the scene.
-        let finalFrame = expandedViewFrame ?? toViewController.view.frame
+        collapsedFrame = backgroundView.convertRect(collapsedFrame, toView: inView)
         if isPresentation {
-            toView!.frame = collapsedFrame
-            toViewAnimationsAdapter?.prepareExpandingView(toView!)
-            inView.addSubview(toView!)
+            frontView.frame = collapsedFrame
+            toViewAnimationsAdapter?.prepareExpandingView(frontView)
         } else {
-            toViewAnimationsAdapter?.prepareCollapsingView(fromView!)
-            inView.addSubview(fromView!)
+            toViewAnimationsAdapter?.prepareCollapsingView(frontView)
         }
+        inView.addSubview(frontView)
         
         // Slide the cell views offscreen and expand the presented view.
         fromViewAnimationsAdapter?.animationsBeganInView(inView, presenting: isPresentation)
@@ -113,29 +133,28 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                 if isPresentation {
                     topSlidingView.center.y -= topSlidingDistance
                     bottomSlidingView.center.y += bottomSlidingDistance
-                    toView!.frame = finalFrame
-                    toView!.layoutIfNeeded()
-                    self.toViewAnimationsAdapter?.animationsForExpandingView(toView!)
+                    frontView.frame = expandedFrame
+                    frontView.layoutIfNeeded()
+                    self.toViewAnimationsAdapter?.animationsForExpandingView(frontView)
                 } else {
                     topSlidingView.center.y += topSlidingDistance
                     bottomSlidingView.center.y -= bottomSlidingDistance
-                    fromView!.frame = collapsedFrame
-                    self.toViewAnimationsAdapter?.animationsForCollapsingView(fromView!)
+                    frontView.frame = collapsedFrame
+                    self.toViewAnimationsAdapter?.animationsForCollapsingView(frontView)
                 }
             },
             completion: { _ in
                 topSlidingView.removeFromSuperview()
                 bottomSlidingView.removeFromSuperview()
                 if !isPresentation {
-                    fromView?.removeFromSuperview()
-                    toView?.removeFromSuperview()
+                    frontView.removeFromSuperview()
                 }
                 transitionContext.completeTransition(true)
                 self.fromViewAnimationsAdapter?.animationsEnded(presenting: isPresentation)
                 if isPresentation {
-                    self.toViewAnimationsAdapter?.completionForExpandingView(toView!)
+                    self.toViewAnimationsAdapter?.completionForExpandingView(frontView)
                 } else {
-                    self.toViewAnimationsAdapter?.completionForCollapsingView(fromView!)
+                    self.toViewAnimationsAdapter?.completionForCollapsingView(frontView)
                 }
             }
         )

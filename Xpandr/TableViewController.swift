@@ -55,11 +55,9 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
             toViewController.view.backgroundColor = selectedCell.backgroundColor
             
             animationController.collapsedViewFrame = {
-                var frame = selectedCell.frame
-                frame.origin.y -= self.tableView.contentOffset.y
-                return frame
+                return selectedCell.convertRect(selectedCell.bounds, toView: self.view)
             }
-            animationController.animationDuration = Constants.DemoAnimationDuration
+//            animationController.animationDuration = Constants.DemoAnimationDuration
             
             if let indexPath = tableView.indexPathForCell(selectedCell) {
                 tableView.deselectRowAtIndexPath(indexPath, animated: false)

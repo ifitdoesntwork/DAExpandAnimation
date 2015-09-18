@@ -36,7 +36,7 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) 
 
         let colorIndex = indexPath.row % Constants.CellColors.count
         cell.backgroundColor = Constants.CellColors[colorIndex]
@@ -49,7 +49,9 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
     private let animationController = DAExpandAnimation()
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let toViewController = segue.destinationViewController as? UIViewController, selectedCell = sender as? UITableViewCell {
+        let toViewController = segue.destinationViewController
+        
+        if let selectedCell = sender as? UITableViewCell {
             toViewController.transitioningDelegate = self
             toViewController.modalPresentationStyle = .Custom
             toViewController.view.backgroundColor = selectedCell.backgroundColor

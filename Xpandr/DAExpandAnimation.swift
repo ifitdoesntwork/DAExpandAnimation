@@ -46,7 +46,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     // Default animation duration is an approximation of the system modal view presentation duration.
     var animationDuration = Constants.SystemAnimationDuration
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return animationDuration
     }
     
@@ -56,7 +56,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let isPresentation = toViewController.presentationController?.presentingViewController == fromViewController
         let backgroundView = (isPresentation ? fromViewController : toViewController).view
         let frontView = (isPresentation ? toViewController : fromViewController).view
-        let inView = transitionContext.containerView()
+        guard let inView = transitionContext.containerView() else { return }
         
         // Figure the ad hoc collapsed and expanded view frames.
         backgroundView.layoutIfNeeded()
@@ -75,7 +75,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let expandedFrame = expandedViewFrame ?? inView.bounds
         
         // Create the sliding views and add them to the scene.
-        var topSlidingViewFrame = CGRect(
+        let topSlidingViewFrame = CGRect(
             x: backgroundView.bounds.origin.x,
             y: backgroundView.bounds.origin.y,
             width: backgroundView.bounds.width,
@@ -89,7 +89,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         topSlidingView.frame = topSlidingViewFrame
         
         let bottomSlidingViewOriginY = collapsedFrame.maxY
-        var bottomSlidingViewFrame = CGRect(
+        let bottomSlidingViewFrame = CGRect(
             x: backgroundView.bounds.origin.x,
             y: bottomSlidingViewOriginY,
             width: backgroundView.bounds.width,

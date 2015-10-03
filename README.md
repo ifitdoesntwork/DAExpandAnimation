@@ -12,7 +12,9 @@ Have your view controller conform to UIViewControllerTransitioningDelegate. Opti
 private let animationController = DAExpandAnimation()
 
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let toViewController = segue.destinationViewController as? UIViewController, selectedCell = sender as? UITableViewCell {
+    let toViewController = segue.destinationViewController
+    
+    if let selectedCell = sender as? UITableViewCell {
         toViewController.transitioningDelegate = self
         toViewController.modalPresentationStyle = .Custom
         toViewController.view.backgroundColor = selectedCell.backgroundColor
@@ -41,7 +43,7 @@ func animationControllerForDismissedController(dismissed: UIViewController) -> U
 Adopting `DAExpandAnimationFromViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presenter's UX.
 
 ```swift
-// Does the animation require sliding the presenting view apart? Defaults to false.
+// Does the animation require sliding the presenting view apart? Defaults to true.
 optional var shouldSlideApart: Bool { get }
 
 // Tweaks in the presenting view controller.

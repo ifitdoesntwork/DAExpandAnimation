@@ -118,8 +118,8 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         // Add the expanding view to the scene.
         collapsedFrame = backgroundView.convertRect(collapsedFrame, toView: inView)
         if isPresentation {
-            frontView.frame = collapsedFrame
             toViewAnimationsAdapter?.prepareExpandingView?(frontView)
+            frontView.frame = collapsedFrame
         } else {
             toViewAnimationsAdapter?.prepareCollapsingView?(frontView)
         }

@@ -116,6 +116,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         }
         
         // Add the expanding view to the scene.
+        inView.addSubview(frontView)
         collapsedFrame = backgroundView.convertRect(collapsedFrame, toView: inView)
         if isPresentation {
             frontView.frame = collapsedFrame
@@ -123,7 +124,6 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         } else {
             toViewAnimationsAdapter?.prepareCollapsingView?(frontView)
         }
-        inView.addSubview(frontView)
         
         // Slide the cell views offscreen and expand the presented view.
         fromViewAnimationsAdapter?.animationsBeganInView?(inView, presenting: isPresentation)

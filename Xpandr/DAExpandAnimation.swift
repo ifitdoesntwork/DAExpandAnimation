@@ -1,7 +1,7 @@
 //
 //  DAExpandAnimation.swift
 //
-//  Copyright (c) 2015 Denis Avdeev. All rights reserved.
+//  Copyright (c) 2015 - 2016 Denis Avdeev. All rights reserved.
 //        
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files (the "Software"),
@@ -164,7 +164,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
 
 protocol DAExpandAnimationFromViewAnimationsAdapter: class {
     
-    // Does the animation require sliding the presenting view apart? Defaults to false.
+    // Does the animation require sliding the presenting view apart? Defaults to true.
     var shouldSlideApart: Bool { get }
     
     // Tweaks in the presenting view controller.
@@ -193,7 +193,7 @@ protocol DAExpandAnimationToViewAnimationsAdapter: class {
 
 extension DAExpandAnimationFromViewAnimationsAdapter {
     
-    var shouldSlideApart: Bool { return false }
+    var shouldSlideApart: Bool { return true }
     func animationsBeganInView(view: UIView, presenting isPresentation: Bool) {}
     func animationsEnded(presenting isPresentation: Bool) {}
     

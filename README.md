@@ -44,30 +44,30 @@ Adopting `DAExpandAnimationFromViewAnimationsAdapter` provides the following opt
 
 ```swift
 // Does the animation require sliding the presenting view apart? Defaults to true.
-optional var shouldSlideApart: Bool { get }
+var shouldSlideApart: Bool { get }
 
 // Tweaks in the presenting view controller.
-optional func animationsBeganInView(view: UIView, presenting isPresentation: Bool)
-optional func animationsEnded(presenting isPresentation: Bool)
+func animationsBeganInView(view: UIView, presenting isPresentation: Bool)
+func animationsEnded(presenting isPresentation: Bool)
 ```
 Adopting `DAExpandAnimationToViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presentation of a new view controller.
 
 ```swift
 // Additional setup before the animations.
-optional func prepareExpandingView(view: UIView)
-optional func prepareCollapsingView(view: UIView)
+func prepareExpandingView(view: UIView)
+func prepareCollapsingView(view: UIView)
 
 // Custom changes to animate.
-optional func animationsForExpandingView(view: UIView)
-optional func animationsForCollapsingView(view: UIView)
+func animationsForExpandingView(view: UIView)
+func animationsForCollapsingView(view: UIView)
 
 // Cleanup after the animations are performed.
-optional func completionForExpandingView(view: UIView)
-optional func completionForCollapsingView(view: UIView)
+func completionForExpandingView(view: UIView)
+func completionForCollapsingView(view: UIView)
 ```
 #MIT License
 
-	Copyright (c) 2015 Denis Avdeev. All rights reserved.
+	Copyright (c) 2015 - 2016 Denis Avdeev. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),

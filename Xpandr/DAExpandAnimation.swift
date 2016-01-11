@@ -119,14 +119,14 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         collapsedFrame = backgroundView.convertRect(collapsedFrame, toView: inView)
         if isPresentation {
             frontView.frame = collapsedFrame
-            toViewAnimationsAdapter?.prepareExpandingView?(frontView)
+            toViewAnimationsAdapter?.prepareExpandingView(frontView)
         } else {
-            toViewAnimationsAdapter?.prepareCollapsingView?(frontView)
+            toViewAnimationsAdapter?.prepareCollapsingView(frontView)
         }
         inView.addSubview(frontView)
         
         // Slide the cell views offscreen and expand the presented view.
-        fromViewAnimationsAdapter?.animationsBeganInView?(inView, presenting: isPresentation)
+        fromViewAnimationsAdapter?.animationsBeganInView(inView, presenting: isPresentation)
         UIView.animateWithDuration(
             transitionDuration(transitionContext),
             animations: {
@@ -135,12 +135,12 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                     bottomSlidingView.center.y += bottomSlidingDistance
                     frontView.frame = expandedFrame
                     frontView.layoutIfNeeded()
-                    self.toViewAnimationsAdapter?.animationsForExpandingView?(frontView)
+                    self.toViewAnimationsAdapter?.animationsForExpandingView(frontView)
                 } else {
                     topSlidingView.center.y += topSlidingDistance
                     bottomSlidingView.center.y -= bottomSlidingDistance
                     frontView.frame = collapsedFrame
-                    self.toViewAnimationsAdapter?.animationsForCollapsingView?(frontView)
+                    self.toViewAnimationsAdapter?.animationsForCollapsingView(frontView)
                 }
             },
             completion: { _ in
@@ -150,11 +150,11 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                     frontView.removeFromSuperview()
                 }
                 transitionContext.completeTransition(true)
-                self.fromViewAnimationsAdapter?.animationsEnded?(presenting: isPresentation)
+                self.fromViewAnimationsAdapter?.animationsEnded(presenting: isPresentation)
                 if isPresentation {
-                    self.toViewAnimationsAdapter?.completionForExpandingView?(frontView)
+                    self.toViewAnimationsAdapter?.completionForExpandingView(frontView)
                 } else {
-                    self.toViewAnimationsAdapter?.completionForCollapsingView?(frontView)
+                    self.toViewAnimationsAdapter?.completionForCollapsingView(frontView)
                 }
             }
         )
@@ -162,29 +162,50 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
 }
 
-@objc protocol DAExpandAnimationFromViewAnimationsAdapter {
+protocol DAExpandAnimationFromViewAnimationsAdapter: class {
     
     // Does the animation require sliding the presenting view apart? Defaults to false.
-    optional var shouldSlideApart: Bool { get }
+    var shouldSlideApart: Bool { get }
     
     // Tweaks in the presenting view controller.
-    optional func animationsBeganInView(view: UIView, presenting isPresentation: Bool)
-    optional func animationsEnded(presenting isPresentation: Bool)
+    func animationsBeganInView(view: UIView, presenting isPresentation: Bool)
+    func animationsEnded(presenting isPresentation: Bool)
     
 }
 
-@objc protocol DAExpandAnimationToViewAnimationsAdapter {
+protocol DAExpandAnimationToViewAnimationsAdapter: class {
     
     // Additional setup before the animations.
-    optional func prepareExpandingView(view: UIView)
-    optional func prepareCollapsingView(view: UIView)
+    func prepareExpandingView(view: UIView)
+    func prepareCollapsingView(view: UIView)
     
     // Custom changes to animate.
-    optional func animationsForExpandingView(view: UIView)
-    optional func animationsForCollapsingView(view: UIView)
+    func animationsForExpandingView(view: UIView)
+    func animationsForCollapsingView(view: UIView)
     
     // Cleanup after the animations are performed.
-    optional func completionForExpandingView(view: UIView)
-    optional func completionForCollapsingView(view: UIView)
+    func completionForExpandingView(view: UIView)
+    func completionForCollapsingView(view: UIView)
+    
+}
+
+// Default protocol implementations
+
+extension DAExpandAnimationFromViewAnimationsAdapter {
+    
+    var shouldSlideApart: Bool { return false }
+    func animationsBeganInView(view: UIView, presenting isPresentation: Bool) {}
+    func animationsEnded(presenting isPresentation: Bool) {}
+    
+}
+
+extension DAExpandAnimationToViewAnimationsAdapter {
+    
+    func prepareExpandingView(view: UIView) {}
+    func prepareCollapsingView(view: UIView) {}
+    func animationsForExpandingView(view: UIView) {}
+    func animationsForCollapsingView(view: UIView) {}
+    func completionForExpandingView(view: UIView) {}
+    func completionForCollapsingView(view: UIView) {}
     
 }

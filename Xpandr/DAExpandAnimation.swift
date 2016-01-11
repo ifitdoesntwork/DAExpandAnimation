@@ -32,10 +32,10 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     // Update fromViewController (the controller that is visible in the beginning of the transition) alongside the transition.
-    var fromViewAnimationsAdapter: DAExpandAnimationFromViewAnimationsAdapter?
+    weak var fromViewAnimationsAdapter: DAExpandAnimationFromViewAnimationsAdapter?
     
     // Update toViewController (the controller that is visible at the end of a completed transition) alongside the transition.
-    var toViewAnimationsAdapter: DAExpandAnimationToViewAnimationsAdapter?
+    weak var toViewAnimationsAdapter: DAExpandAnimationToViewAnimationsAdapter?
     
     // Frame of the view to expand in presenter's view coordinates. Requires the current frame to deal with view size changes.
     var collapsedViewFrame: (() -> CGRect)?

@@ -11,30 +11,30 @@ Have your view controller conform to UIViewControllerTransitioningDelegate. Opti
 ```swift
 private let animationController = DAExpandAnimation()
 
-override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    let toViewController = segue.destinationViewController
+override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    let toViewController = segue.destination
     
     if let selectedCell = sender as? UITableViewCell {
         toViewController.transitioningDelegate = self
-        toViewController.modalPresentationStyle = .Custom
+        toViewController.modalPresentationStyle = .custom
         toViewController.view.backgroundColor = selectedCell.backgroundColor
         
         animationController.collapsedViewFrame = {
             return selectedCell.frame
         }
-        animationController.animationDuration = Constants.SomeAnimationDuration
+        animationController.animationDuration = Constants.someAnimationDuration
         
-        if let indexPath = tableView.indexPathForCell(selectedCell) {
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        if let indexPath = tableView.indexPath(for: selectedCell) {
+            tableView.deselectRow(at: indexPath, animated: false)
         }
     }
 }
     
-func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return animationController
 }
 
-func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     return animationController
 }
 ```
@@ -43,27 +43,42 @@ func animationControllerForDismissedController(dismissed: UIViewController) -> U
 Adopting `DAExpandAnimationFromViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presenter's UX.
 
 ```swift
-// Does the animation require sliding the presenting view apart? Defaults to true.
+/// Does the animation require sliding the presenting view apart?
+/// Defaults to `true`.
 var shouldSlideApart: Bool { get }
 
-// Tweaks in the presenting view controller.
-func animationsBeganInView(view: UIView, presenting isPresentation: Bool)
-func animationsEnded(presenting isPresentation: Bool)
+/// Notifies the presenting view controller that animations are about to occur.
+func animationsWillBegin(in view: UIView, presenting isPresentation: Bool)
+
+/// Notifies the presenting view controller that animations are just completed.
+func animationsDidEnd(presenting isPresentation: Bool)
 ```
 Adopting `DAExpandAnimationToViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presentation of a new view controller.
 
 ```swift
-// Additional setup before the animations.
-func prepareExpandingView(view: UIView)
-func prepareCollapsingView(view: UIView)
+/// Gives the presented view controller a chance to prepare
+/// the expanding `view` before animation.
+func prepare(expandingView view: UIView)
 
-// Custom changes to animate.
-func animationsForExpandingView(view: UIView)
-func animationsForCollapsingView(view: UIView)
+/// Gives the presented view controller a chance to prepare
+/// the collapsing `view` before animation.
+func prepare(collapsingView view: UIView)
 
-// Cleanup after the animations are performed.
-func completionForExpandingView(view: UIView)
-func completionForCollapsingView(view: UIView)
+/// Gives the presented view controller ability to change
+/// properties of expanding `view` alongside the animation.
+func animateExpansion(within view: UIView)
+
+/// Gives the presented view controller ability to change
+/// properties of collapsing `view` alongside the animation.
+func animateCollapse(within view: UIView)
+
+/// Gives the presented view controller ability to
+/// clean `view` up after the expanding animation is performed.
+func completeExpansion(within view: UIView)
+
+/// Gives the presented view controller ability to
+/// clean `view` up after the collapsing animation is performed.
+func completeCollapse(within view: UIView)
 ```
 #MIT License
 

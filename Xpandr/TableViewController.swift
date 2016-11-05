@@ -11,35 +11,35 @@ import UIKit
 class TableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
 
     private struct Constants {
-        static let RowsCount = 20
-        static let CellColors: [UIColor] = [
-            .greenColor(),
-            .blueColor(),
-            .orangeColor(),
-            .cyanColor(),
-            .redColor(),
-            .purpleColor(),
-            .magentaColor(),
-            .brownColor()
+        static let rowsCount = 20
+        static let cellColors: [UIColor] = [
+            .green,
+            .blue,
+            .orange,
+            .cyan,
+            .red,
+            .purple,
+            .magenta,
+            .brown
         ]
-        static let DemoAnimationDuration = 1.0
+        static let demoAnimationDuration = 1.0
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.RowsCount
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Constants.rowsCount
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath) 
 
-        let colorIndex = indexPath.row % Constants.CellColors.count
-        cell.backgroundColor = Constants.CellColors[colorIndex]
+        let colorIndex = indexPath.row % Constants.cellColors.count
+        cell.backgroundColor = Constants.cellColors[colorIndex]
 
         return cell
     }
@@ -48,30 +48,30 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
 
     private let animationController = DAExpandAnimation()
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let toViewController = segue.destinationViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let toViewController = segue.destination
         
         if let selectedCell = sender as? UITableViewCell {
             toViewController.transitioningDelegate = self
-            toViewController.modalPresentationStyle = .Custom
+            toViewController.modalPresentationStyle = .custom
             toViewController.view.backgroundColor = selectedCell.backgroundColor
             
             animationController.collapsedViewFrame = {
                 return selectedCell.frame
             }
-            animationController.animationDuration = Constants.DemoAnimationDuration
+            animationController.animationDuration = Constants.demoAnimationDuration
             
-            if let indexPath = tableView.indexPathForCell(selectedCell) {
-                tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            if let indexPath = tableView.indexPath(for: selectedCell) {
+                tableView.deselectRow(at: indexPath, animated: false)
             }
         }
     }
     
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animationController
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return animationController
     }
 

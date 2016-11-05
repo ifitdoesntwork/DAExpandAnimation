@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBAction func dismiss(sender: UITapGestureRecognizer) {
-        if sender.state == .Ended {
-            dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func dismiss(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            dismiss(animated: true, completion: nil)
         }
     }
 

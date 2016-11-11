@@ -31,23 +31,23 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         static let systemAnimationDuration = 0.24
     }
     
-    /// Updates `fromViewController` (the controller that is visible in
-    /// the beginning of the transition) alongside the transition.
-    weak var fromViewAnimationsAdapter: DAExpandAnimationFromViewAnimationsAdapter?
+    /// The delegate for adapting the presenter's view to the transition.
+    weak var presentingViewAdapter: DAExpandAnimationPresentingViewAdapter?
     
-    /// Updates `toViewController` (the controller that is visible at
-    /// the end of a completed transition) alongside the transition.
-    weak var toViewAnimationsAdapter: DAExpandAnimationToViewAnimationsAdapter?
+    /// The delegate for adapting the presented view to the transition.
+    weak var presentedViewAdapter: DAExpandAnimationPresentedViewAdapter?
     
-    /// Frame of the view to expand in presenter's view coordinates.
-    /// Requires the current frame to deal with view size changes.
+    /// The frame of the view to expand, in presenter's view coordinates.
+    /// The closure is required to get the actual frame to collapse to.
+    /// When set to `nil`, the view expands from the center of presenter's view.
     var collapsedViewFrame: (() -> CGRect)?
     
-    /// Desired final frame for the view in the window coordinates.
-    /// When it is set to `nil` the view covers the whole window.
+    /// Desired final frame for the expanding view, in the window coordinates.
+    /// When set to `nil`, the view covers the whole window.
     var expandedViewFrame: CGRect?
     
-    /// An approximation of the system modal view presentation duration.
+    /// The total duration of the animations, measured in seconds. Set to an
+    /// approximation of the system modal view presentation duration by default.
     var animationDuration = Constants.systemAnimationDuration
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -62,7 +62,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         let frontView = (isPresentation ? toViewController : fromViewController).view!
         let inView = transitionContext.containerView
         
-        // Figure the ad hoc collapsed and expanded view frames.
+        // Figure the actual collapsed and expanded view frames.
         backgroundView.layoutIfNeeded()
         var collapsedFrame = collapsedViewFrame?() ?? CGRect(
             x: backgroundView.bounds.origin.x,
@@ -114,7 +114,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         }
         topSlidingView?.frame = backgroundView.convert(topSlidingView!.frame, to: inView)
         bottomSlidingView?.frame = backgroundView.convert(bottomSlidingView!.frame, to: inView)
-        if !(fromViewAnimationsAdapter?.shouldSlideApart == false) && topSlidingView != nil && bottomSlidingView != nil {
+        if !(presentingViewAdapter?.shouldSlideApart == false) && topSlidingView != nil && bottomSlidingView != nil {
             inView.addSubview(topSlidingView!)
             inView.addSubview(bottomSlidingView!)
         }
@@ -124,13 +124,13 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         collapsedFrame = backgroundView.convert(collapsedFrame, to: inView)
         if isPresentation {
             frontView.frame = collapsedFrame
-            toViewAnimationsAdapter?.prepare(expandingView: frontView)
+            presentedViewAdapter?.prepare(expanding: frontView)
         } else {
-            toViewAnimationsAdapter?.prepare(collapsingView: frontView)
+            presentedViewAdapter?.prepare(collapsing: frontView)
         }
         
         // Slide the cell views offscreen and expand the presented view.
-        fromViewAnimationsAdapter?.animationsWillBegin(in: inView, presenting: isPresentation)
+        presentingViewAdapter?.animationsWillBegin(in: inView, presenting: isPresentation)
         UIView.animate(
             withDuration: transitionDuration(using: transitionContext),
             animations: {
@@ -139,14 +139,14 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                     bottomSlidingView?.center.y += bottomSlidingDistance
                     frontView.frame = expandedFrame
                     frontView.layoutIfNeeded()
-                    self.toViewAnimationsAdapter?.animateExpansion(within: frontView)
+                    self.presentedViewAdapter?.animate(expanding: frontView)
                 } else {
                     topSlidingView?.center.y += topSlidingDistance
                     bottomSlidingView?.center.y -= bottomSlidingDistance
                     frontView.frame = collapsedFrame
-                    self.toViewAnimationsAdapter?.animateCollapse(within: frontView)
+                    self.presentedViewAdapter?.animate(collapsing: frontView)
                 }
-            },
+        },
             completion: { _ in
                 topSlidingView?.removeFromSuperview()
                 bottomSlidingView?.removeFromSuperview()
@@ -154,62 +154,63 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                     frontView.removeFromSuperview()
                 }
                 transitionContext.completeTransition(true)
-                self.fromViewAnimationsAdapter?.animationsDidEnd(presenting: isPresentation)
+                self.presentingViewAdapter?.animationsDidEnd(presenting: isPresentation)
                 if isPresentation {
-                    self.toViewAnimationsAdapter?.completeCollapse(within: frontView)
+                    self.presentedViewAdapter?.cleanup(expanding: frontView)
                 } else {
-                    self.toViewAnimationsAdapter?.completeCollapse(within: frontView)                }
+                    self.presentedViewAdapter?.cleanup(collapsing: frontView)
+                }
             }
         )
     }
     
 }
 
-protocol DAExpandAnimationFromViewAnimationsAdapter: class {
+protocol DAExpandAnimationPresentingViewAdapter: class {
     
-    /// Does the animation require sliding the presenting view apart?
-    /// Defaults to `true`.
+    /// A boolean value that determines whether the animations include sliding
+    /// the presenting view apart. Defaults to `true`.
     var shouldSlideApart: Bool { get }
     
-    /// Notifies the presenting view controller that animations are about to occur.
+    /// Notifies the presenting view adapter that animations are about to occur.
     func animationsWillBegin(in view: UIView, presenting isPresentation: Bool)
     
-    /// Notifies the presenting view controller that animations are just completed.
+    /// Notifies the presenting view adapter that animations are just completed.
     func animationsDidEnd(presenting isPresentation: Bool)
     
 }
 
-protocol DAExpandAnimationToViewAnimationsAdapter: class {
+protocol DAExpandAnimationPresentedViewAdapter: class {
     
-    /// Gives the presented view controller a chance to prepare
-    /// the expanding `view` before animation.
-    func prepare(expandingView view: UIView)
+    /// Gives the presented view adapter a chance to prepare
+    /// the expanding `view` before the animations.
+    func prepare(expanding view: UIView)
     
-    /// Gives the presented view controller a chance to prepare
-    /// the collapsing `view` before animation.
-    func prepare(collapsingView view: UIView)
+    /// Gives the presented view adapter ability to change
+    /// properties of the expanding `view` alongside the animations.
+    func animate(expanding view: UIView)
     
-    /// Gives the presented view controller ability to change
-    /// properties of expanding `view` alongside the animation.
-    func animateExpansion(within view: UIView)
+    /// Gives the presented view adapter ability to clean the expanded `view` up
+    /// after the animations are performed.
+    func cleanup(expanding view: UIView)
     
-    /// Gives the presented view controller ability to change
-    /// properties of collapsing `view` alongside the animation.
-    func animateCollapse(within view: UIView)
+    /// Gives the presented view adapter a chance to prepare
+    /// the collapsing `view` before the animations.
+    func prepare(collapsing view: UIView)
     
-    /// Gives the presented view controller ability to
-    /// clean `view` up after the expanding animation is performed.
-    func completeExpansion(within view: UIView)
+    /// Gives the presented view adapter ability to change
+    /// properties of the collapsing `view` alongside the animations.
+    func animate(collapsing view: UIView)
     
-    /// Gives the presented view controller ability to
-    /// clean `view` up after the collapsing animation is performed.
-    func completeCollapse(within view: UIView)
+    /// Gives the presented view adapter ability to clean the collapsed `view`
+    /// up after the animations are performed.
+    func cleanup(collapsing view: UIView)
     
 }
 
 // Default protocol implementations
 
-extension DAExpandAnimationFromViewAnimationsAdapter {
+extension DAExpandAnimationPresentingViewAdapter {
     
     var shouldSlideApart: Bool { return true }
     func animationsWillBegin(in view: UIView, presenting isPresentation: Bool) {}
@@ -217,13 +218,13 @@ extension DAExpandAnimationFromViewAnimationsAdapter {
     
 }
 
-extension DAExpandAnimationToViewAnimationsAdapter {
+extension DAExpandAnimationPresentedViewAdapter {
     
-    func prepare(expandingView view: UIView) {}
-    func prepare(collapsingView view: UIView) {}
-    func animateExpansion(within view: UIView) {}
-    func animateCollapse(within view: UIView) {}
-    func completeExpansion(within view: UIView) {}
-    func completeCollapse(within view: UIView) {}
+    func prepare(expanding view: UIView) {}
+    func animate(expanding view: UIView) {}
+    func cleanup(expanding view: UIView) {}
+    func prepare(collapsing view: UIView) {}
+    func animate(collapsing view: UIView) {}
+    func cleanup(collapsing view: UIView) {}
     
 }

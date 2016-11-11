@@ -15,7 +15,7 @@
 		92D7D62F1B98128D00AD9BC9 /* XpandrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */; };
 		92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6381B9815D100AD9BC9 /* TableViewController.swift */; };
 		92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */; };
-		92D845651B98DE3800EF2E0D /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
+		922269791DD5BA2600E90E40 /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		92D7D6131B98128D00AD9BC9 /* Xpandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D6171B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 				92D7D6211B98128D00AD9BC9 /* LaunchScreen.xib */,
 				92D7D6171B98128D00AD9BC9 /* Info.plist */,
 				92D845641B98DE3800EF2E0D /* screencapture.gif */,
+				922269781DD5B8FF00E90E40 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -206,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92D7D61E1B98128D00AD9BC9 /* Main.storyboard in Resources */,
-				92D845651B98DE3800EF2E0D /* screencapture.gif in Resources */,
+				922269791DD5BA2600E90E40 /* screencapture.gif in Resources */,
 				92D7D6231B98128D00AD9BC9 /* LaunchScreen.xib in Resources */,
 				92D7D6201B98128D00AD9BC9 /* Images.xcassets in Resources */,
 			);

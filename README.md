@@ -40,45 +40,45 @@ func animationController(forDismissed dismissed: UIViewController) -> UIViewCont
 ```
 # Protocols
 
-Adopting `DAExpandAnimationFromViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presenter's UX.
+Adopting `DAExpandAnimationPresentingViewAdapter` provides the following optional delegate methods for tailoring the presenter's UX.
 
 ```swift
-/// Does the animation require sliding the presenting view apart?
-/// Defaults to `true`.
+/// A boolean value that determines whether the animations include sliding
+/// the presenting view apart. Defaults to `true`.
 var shouldSlideApart: Bool { get }
 
-/// Notifies the presenting view controller that animations are about to occur.
+/// Notifies the presenting view adapter that animations are about to occur.
 func animationsWillBegin(in view: UIView, presenting isPresentation: Bool)
 
-/// Notifies the presenting view controller that animations are just completed.
+/// Notifies the presenting view adapter that animations are just completed.
 func animationsDidEnd(presenting isPresentation: Bool)
 ```
-Adopting `DAExpandAnimationToViewAnimationsAdapter` provides the following optional delegate methods for tailoring the presentation of a new view controller.
+Adopting `DAExpandAnimationPresentedViewAdapter` provides the following optional delegate methods for tailoring the presentation of a new view controller.
 
 ```swift
-/// Gives the presented view controller a chance to prepare
-/// the expanding `view` before animation.
-func prepare(expandingView view: UIView)
+/// Gives the presented view adapter a chance to prepare
+/// the expanding `view` before the animations.
+func prepare(expanding view: UIView)
 
-/// Gives the presented view controller a chance to prepare
-/// the collapsing `view` before animation.
-func prepare(collapsingView view: UIView)
+/// Gives the presented view adapter ability to change
+/// properties of the expanding `view` alongside the animations.
+func animate(expanding view: UIView)
 
-/// Gives the presented view controller ability to change
-/// properties of expanding `view` alongside the animation.
-func animateExpansion(within view: UIView)
+/// Gives the presented view adapter ability to clean the expanded `view` up
+/// after the animations are performed.
+func cleanup(expanding view: UIView)
 
-/// Gives the presented view controller ability to change
-/// properties of collapsing `view` alongside the animation.
-func animateCollapse(within view: UIView)
+/// Gives the presented view adapter a chance to prepare
+/// the collapsing `view` before the animations.
+func prepare(collapsing view: UIView)
 
-/// Gives the presented view controller ability to
-/// clean `view` up after the expanding animation is performed.
-func completeExpansion(within view: UIView)
+/// Gives the presented view adapter ability to change
+/// properties of the collapsing `view` alongside the animations.
+func animate(collapsing view: UIView)
 
-/// Gives the presented view controller ability to
-/// clean `view` up after the collapsing animation is performed.
-func completeCollapse(within view: UIView)
+/// Gives the presented view adapter ability to clean the collapsed `view`
+/// up after the animations are performed.
+func cleanup(collapsing view: UIView)
 ```
 #MIT License
 

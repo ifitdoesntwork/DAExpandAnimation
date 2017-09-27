@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922269791DD5BA2600E90E40 /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
 		92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */; };
 		92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D61A1B98128D00AD9BC9 /* ViewController.swift */; };
 		92D7D61E1B98128D00AD9BC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D61C1B98128D00AD9BC9 /* Main.storyboard */; };
@@ -15,7 +16,6 @@
 		92D7D62F1B98128D00AD9BC9 /* XpandrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */; };
 		92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6381B9815D100AD9BC9 /* TableViewController.swift */; };
 		92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */; };
-		922269791DD5BA2600E90E40 /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,11 +174,11 @@
 				TargetAttributes = {
 					92D7D6121B98128D00AD9BC9 = {
 						CreatedOnToolsVersion = 6.4;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0900;
 					};
 					92D7D6271B98128D00AD9BC9 = {
 						CreatedOnToolsVersion = 6.4;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0900;
 						TestTargetID = 92D7D6121B98128D00AD9BC9;
 					};
 				};
@@ -371,7 +371,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -384,7 +385,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -392,10 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -404,7 +403,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Xpandr.app/Xpandr";
 			};
 			name = Debug;
@@ -413,15 +413,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = XpandrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Xpandr.app/Xpandr";
 			};
 			name = Release;

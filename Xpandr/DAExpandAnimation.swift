@@ -119,6 +119,8 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
             inView.addSubview(bottomSlidingView!)
         }
         
+        frontView.clipsToBounds = true
+        
         // Add the expanding view to the scene.
         inView.addSubview(frontView)
         collapsedFrame = backgroundView.convert(collapsedFrame, to: inView)

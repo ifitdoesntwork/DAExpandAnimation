@@ -3,7 +3,7 @@
 //  Xpandr
 //
 //  Created by Denis Avdeev on 03.09.15.
-//  Copyright (c) 2015 - 2017 Denis Avdeev. All rights reserved.
+//  Copyright (c) 2015 - 2020 Denis Avdeev. All rights reserved.
 //
 
 import UIKit

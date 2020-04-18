@@ -13,14 +13,14 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
     private struct Constants {
         static let rowsCount = 20
         static let cellColors: [UIColor] = [
-            .green,
-            .blue,
-            .orange,
-            .cyan,
-            .red,
-            .purple,
-            .magenta,
-            .brown
+            .systemGreen,
+            .systemBlue,
+            .systemOrange,
+            .brown,
+            .systemRed,
+            .systemYellow,
+            .systemTeal,
+            .systemPink
         ]
         static let demoAnimationDuration = 1.0
     }

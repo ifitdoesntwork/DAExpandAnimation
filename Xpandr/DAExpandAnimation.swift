@@ -83,7 +83,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
             x: backgroundView.bounds.origin.x,
             y: backgroundView.bounds.origin.y,
             width: backgroundView.bounds.width,
-            height: collapsedFrame.origin.y
+            height: max(collapsedFrame.origin.y, backgroundView.bounds.origin.y)
         )
         let topSlidingView = backgroundView.resizableSnapshotView(
             from: topSlidingViewFrame,
@@ -92,7 +92,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         )
         topSlidingView?.frame = topSlidingViewFrame
         
-        let bottomSlidingViewOriginY = collapsedFrame.maxY
+        let bottomSlidingViewOriginY = min(collapsedFrame.maxY, backgroundView.bounds.maxY)
         let bottomSlidingViewFrame = CGRect(
             x: backgroundView.bounds.origin.x,
             y: bottomSlidingViewOriginY,
@@ -146,7 +146,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
                     frontView.frame = collapsedFrame
                     self.presentedViewAdapter?.animate(collapsing: frontView)
                 }
-        },
+            },
             completion: { _ in
                 topSlidingView?.removeFromSuperview()
                 bottomSlidingView?.removeFromSuperview()

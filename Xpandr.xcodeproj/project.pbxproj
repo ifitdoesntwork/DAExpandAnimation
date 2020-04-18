@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		924C5489244B2327003FDE19 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		92D7D6131B98128D00AD9BC9 /* Xpandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D6171B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +64,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		924C548B244B269A003FDE19 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				924C548C244B2781003FDE19 /* DAExpandAnimation */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		924C548C244B2781003FDE19 /* DAExpandAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */,
+			);
+			path = DAExpandAnimation;
+			sourceTree = "<group>";
+		};
 		92D7D60A1B98128D00AD9BC9 = {
 			isa = PBXGroup;
 			children = (
+				924C548B244B269A003FDE19 /* Sources */,
 				92D7D6151B98128D00AD9BC9 /* Xpandr */,
 				92D7D62B1B98128D00AD9BC9 /* XpandrTests */,
 				92D7D6141B98128D00AD9BC9 /* Products */,
@@ -87,7 +105,6 @@
 				92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */,
 				92D7D6381B9815D100AD9BC9 /* TableViewController.swift */,
 				92D7D61A1B98128D00AD9BC9 /* ViewController.swift */,
-				92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */,
 				92D7D61C1B98128D00AD9BC9 /* Main.storyboard */,
 				92D7D6161B98128D00AD9BC9 /* Supporting Files */,
 			);
@@ -102,6 +119,7 @@
 				92D7D6171B98128D00AD9BC9 /* Info.plist */,
 				92D845641B98DE3800EF2E0D /* screencapture.gif */,
 				922269781DD5B8FF00E90E40 /* README.md */,
+				924C5489244B2327003FDE19 /* Package.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

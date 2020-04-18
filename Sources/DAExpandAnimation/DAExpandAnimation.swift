@@ -25,36 +25,36 @@
 
 import UIKit
 
-class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
+public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     private struct Constants {
         static let systemAnimationDuration = 0.24
     }
     
     /// The delegate for adapting the presenter's view to the transition.
-    weak var presentingViewAdapter: DAExpandAnimationPresentingViewAdapter?
+    public weak var presentingViewAdapter: DAExpandAnimationPresentingViewAdapter?
     
     /// The delegate for adapting the presented view to the transition.
-    weak var presentedViewAdapter: DAExpandAnimationPresentedViewAdapter?
+    public weak var presentedViewAdapter: DAExpandAnimationPresentedViewAdapter?
     
     /// The frame of the view to expand, in presenter's view coordinates.
     /// The closure is required to get the actual frame to collapse to.
     /// When set to `nil`, the view expands from the center of presenter's view.
-    var collapsedViewFrame: (() -> CGRect)?
+    public var collapsedViewFrame: (() -> CGRect)?
     
     /// Desired final frame for the expanding view, in the window coordinates.
     /// When set to `nil`, the view covers the whole window.
-    var expandedViewFrame: CGRect?
+    public var expandedViewFrame: CGRect?
     
     /// The total duration of the animations, measured in seconds. Set to an
     /// approximation of the system modal view presentation duration by default.
-    var animationDuration = Constants.systemAnimationDuration
+    public var animationDuration = Constants.systemAnimationDuration
     
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return animationDuration
     }
     
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
         let isPresentation = toViewController.presentationController?.presentingViewController == fromViewController
@@ -166,7 +166,7 @@ class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
 }
 
-protocol DAExpandAnimationPresentingViewAdapter: class {
+public protocol DAExpandAnimationPresentingViewAdapter: class {
     
     /// A boolean value that determines whether the animations include sliding
     /// the presenting view apart. Defaults to `true`.
@@ -180,7 +180,7 @@ protocol DAExpandAnimationPresentingViewAdapter: class {
     
 }
 
-protocol DAExpandAnimationPresentedViewAdapter: class {
+public protocol DAExpandAnimationPresentedViewAdapter: class {
     
     /// Gives the presented view adapter a chance to prepare
     /// the expanding `view` before the animations.
@@ -210,7 +210,7 @@ protocol DAExpandAnimationPresentedViewAdapter: class {
 
 // Default protocol implementations
 
-extension DAExpandAnimationPresentingViewAdapter {
+public extension DAExpandAnimationPresentingViewAdapter {
     
     var shouldSlideApart: Bool { return true }
     func animationsWillBegin(in view: UIView, presenting isPresentation: Bool) {}
@@ -218,7 +218,7 @@ extension DAExpandAnimationPresentingViewAdapter {
     
 }
 
-extension DAExpandAnimationPresentedViewAdapter {
+public extension DAExpandAnimationPresentedViewAdapter {
     
     func prepare(expanding view: UIView) {}
     func animate(expanding view: UIView) {}

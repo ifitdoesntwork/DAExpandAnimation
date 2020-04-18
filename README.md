@@ -4,7 +4,7 @@ A custom modal transition that presents a controller with an expanding effect wh
 # Screenshot
 ![DAExpandAnimation](https://raw.githubusercontent.com/ifitdoesntwork/DAExpandAnimation/master/Xpandr/screencapture.gif)
 # Installation
-Simply copy the `Xpandr/DAExpandAnimation.swift` file into your project.
+Simply copy the `Sources/DAExpandAnimation/DAExpandAnimation.swift` file into your project.
 ### Swift Package Manager
 DAExpandAnimation is also available through [Swift Package Manager](https://github.com/apple/swift-package-manager/). In Xcode select `File > Swift Packages > Add Package Dependency...` and type `DAExpandAnimation` in the search field.
 # Usage

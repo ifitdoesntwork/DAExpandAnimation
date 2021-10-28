@@ -5,7 +5,7 @@
 //  Xpandr
 //
 //  Created by Denis Avdeev on 18.04.2020.
-//  Copyright © 2020 Denis Avdeev. All rights reserved.
+//  Copyright © 2020-2021 Denis Avdeev. All rights reserved.
 //
 
 import PackageDescription

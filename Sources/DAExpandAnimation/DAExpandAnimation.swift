@@ -166,7 +166,7 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
     
 }
 
-public protocol DAExpandAnimationPresentingViewAdapter: class {
+public protocol DAExpandAnimationPresentingViewAdapter: AnyObject {
     
     /// A boolean value that determines whether the animations include sliding
     /// the presenting view apart. Defaults to `true`.
@@ -180,7 +180,7 @@ public protocol DAExpandAnimationPresentingViewAdapter: class {
     
 }
 
-public protocol DAExpandAnimationPresentedViewAdapter: class {
+public protocol DAExpandAnimationPresentedViewAdapter: AnyObject {
     
     /// Gives the presented view adapter a chance to prepare
     /// the expanding `view` before the animations.

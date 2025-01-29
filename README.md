@@ -6,39 +6,36 @@ A custom modal transition that presents a controller with an expanding effect wh
 # Installation
 Simply copy the `Sources/DAExpandAnimation/DAExpandAnimation.swift` file into your project.
 ### Swift Package Manager
-DAExpandAnimation is also available through [Swift Package Manager](https://github.com/apple/swift-package-manager/). In Xcode select `File > Swift Packages > Add Package Dependency...` and type `DAExpandAnimation` in the search field.
+DAExpandAnimation is also available through [Swift Package Manager](https://github.com/apple/swift-package-manager/).
 # Usage
 Try the example project!
 
-Have your view controller conform to UIViewControllerTransitioningDelegate. Optionally set the `collapsedViewFrame`, the `expandedViewFrame` and the `animationDuration`.
+Have your view controller conform to UIViewControllerTransitioningDelegate. Optionally set the `collapsedViewFrame`, the `expandedViewFrame`, the `slidingPart` and the `animationDuration`.
 ```swift
 private let animationController = DAExpandAnimation()
 
 override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    let toViewController = segue.destination
-    
-    if let selectedCell = sender as? UITableViewCell {
-        toViewController.transitioningDelegate = self
-        toViewController.modalPresentationStyle = .custom
-        toViewController.view.backgroundColor = selectedCell.backgroundColor
-        
-        animationController.collapsedViewFrame = {
-            return selectedCell.frame
-        }
-        animationController.animationDuration = Constants.someAnimationDuration
-        
-        if let indexPath = tableView.indexPath(for: selectedCell) {
-            tableView.deselectRow(at: indexPath, animated: false)
-        }
+    guard let selectedCell = sender as? UITableViewCell else {
+        return
     }
+    
+    let toViewController = segue.destination
+    toViewController.transitioningDelegate = self
+    toViewController.modalPresentationStyle = .custom
+    toViewController.view.backgroundColor = selectedCell.backgroundColor
+    
+    animationController.collapsedViewFrame = {
+        selectedCell.frame
+    }
+    animationController.animationDuration = Constants.demoAnimationDuration()
 }
     
 func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return animationController
+    animationController
 }
 
 func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    return animationController
+    animationController
 }
 ```
 # Protocols
@@ -46,14 +43,14 @@ func animationController(forDismissed dismissed: UIViewController) -> UIViewCont
 Adopting `DAExpandAnimationPresentingViewAdapter` provides the following optional delegate methods for tailoring the presenter's UX.
 
 ```swift
-/// A boolean value that determines whether the animations include sliding
-/// the presenting view apart. Defaults to `true`.
+/// Determines whether the animations include sliding the presenter's view apart.
+/// Defaults to `true`.
 var shouldSlideApart: Bool { get }
 
-/// Notifies the presenting view adapter that animations are about to occur.
+/// Notifies the presenter's view adapter that animations are about to occur.
 func animationsWillBegin(in view: UIView, presenting isPresentation: Bool)
 
-/// Notifies the presenting view adapter that animations are just completed.
+/// Notifies the presenter's view adapter that animations are just completed.
 func animationsDidEnd(presenting isPresentation: Bool)
 ```
 Adopting `DAExpandAnimationPresentedViewAdapter` provides the following optional delegate methods for tailoring the presentation of a new view controller.
@@ -85,7 +82,7 @@ func cleanup(collapsing view: UIView)
 ```
 # MIT License
 
-	Copyright (c) 2015 - 2021 Denis Avdeev. All rights reserved.
+	Copyright (c) 2015 - 2025 Denis Avdeev. All rights reserved.
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),

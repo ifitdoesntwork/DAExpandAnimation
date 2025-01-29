@@ -1,0 +1,15 @@
+{
+  "originHash" : "655393e5a0593b8d300f333a58bc8f460512d46d8277352869dd7ce992c1c8c1",
+  "pins" : [
+    {
+      "identity" : "daexpandanimation",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ifitdoesntwork/DAExpandAnimation",
+      "state" : {
+        "revision" : "c8acf1360fd805ffaacd1be2b1b5b18d195d7a35",
+        "version" : "1.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}

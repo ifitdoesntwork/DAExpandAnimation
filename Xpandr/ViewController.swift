@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     @IBAction func dismiss(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            dismiss(animated: true, completion: nil)
+            dismiss(animated: true)
         }
     }
 

@@ -8,29 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		922269791DD5BA2600E90E40 /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
+		9289A2222D4A07CD00402CB9 /* DAExpandAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 9289A2212D4A07CD00402CB9 /* DAExpandAnimation */; };
 		92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */; };
 		92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D61A1B98128D00AD9BC9 /* ViewController.swift */; };
 		92D7D61E1B98128D00AD9BC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D61C1B98128D00AD9BC9 /* Main.storyboard */; };
 		92D7D6201B98128D00AD9BC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D61F1B98128D00AD9BC9 /* Images.xcassets */; };
 		92D7D6231B98128D00AD9BC9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D7D6211B98128D00AD9BC9 /* LaunchScreen.xib */; };
-		92D7D62F1B98128D00AD9BC9 /* XpandrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */; };
 		92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6381B9815D100AD9BC9 /* TableViewController.swift */; };
-		92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		92D7D6291B98128D00AD9BC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 92D7D60B1B98128D00AD9BC9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 92D7D6121B98128D00AD9BC9;
-			remoteInfo = Xpandr;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		924C5489244B2327003FDE19 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = SOURCE_ROOT; };
 		92D7D6131B98128D00AD9BC9 /* Xpandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D6171B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,11 +26,7 @@
 		92D7D61D1B98128D00AD9BC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92D7D61F1B98128D00AD9BC9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92D7D6221B98128D00AD9BC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		92D7D6281B98128D00AD9BC9 /* XpandrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XpandrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92D7D62D1B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XpandrTests.swift; sourceTree = "<group>"; };
 		92D7D6381B9815D100AD9BC9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAExpandAnimation.swift; sourceTree = "<group>"; };
 		92D845641B98DE3800EF2E0D /* screencapture.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = screencapture.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,41 +35,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92D7D6251B98128D00AD9BC9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				9289A2222D4A07CD00402CB9 /* DAExpandAnimation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		924C548B244B269A003FDE19 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				924C548C244B2781003FDE19 /* DAExpandAnimation */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		924C548C244B2781003FDE19 /* DAExpandAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				92D7D63A1B98168000AD9BC9 /* DAExpandAnimation.swift */,
-			);
-			path = DAExpandAnimation;
-			sourceTree = "<group>";
-		};
 		92D7D60A1B98128D00AD9BC9 = {
 			isa = PBXGroup;
 			children = (
-				924C548B244B269A003FDE19 /* Sources */,
 				92D7D6151B98128D00AD9BC9 /* Xpandr */,
-				92D7D62B1B98128D00AD9BC9 /* XpandrTests */,
 				92D7D6141B98128D00AD9BC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				92D7D6131B98128D00AD9BC9 /* Xpandr.app */,
-				92D7D6281B98128D00AD9BC9 /* XpandrTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,24 +78,6 @@
 				92D7D6171B98128D00AD9BC9 /* Info.plist */,
 				92D845641B98DE3800EF2E0D /* screencapture.gif */,
 				922269781DD5B8FF00E90E40 /* README.md */,
-				924C5489244B2327003FDE19 /* Package.swift */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		92D7D62B1B98128D00AD9BC9 /* XpandrTests */ = {
-			isa = PBXGroup;
-			children = (
-				92D7D62E1B98128D00AD9BC9 /* XpandrTests.swift */,
-				92D7D62C1B98128D00AD9BC9 /* Supporting Files */,
-			);
-			path = XpandrTests;
-			sourceTree = "<group>";
-		};
-		92D7D62C1B98128D00AD9BC9 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				92D7D62D1B98128D00AD9BC9 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -161,24 +102,6 @@
 			productReference = 92D7D6131B98128D00AD9BC9 /* Xpandr.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92D7D6271B98128D00AD9BC9 /* XpandrTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 92D7D6351B98128D00AD9BC9 /* Build configuration list for PBXNativeTarget "XpandrTests" */;
-			buildPhases = (
-				92D7D6241B98128D00AD9BC9 /* Sources */,
-				92D7D6251B98128D00AD9BC9 /* Frameworks */,
-				92D7D6261B98128D00AD9BC9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				92D7D62A1B98128D00AD9BC9 /* PBXTargetDependency */,
-			);
-			name = XpandrTests;
-			productName = XpandrTests;
-			productReference = 92D7D6281B98128D00AD9BC9 /* XpandrTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -195,11 +118,6 @@
 						CreatedOnToolsVersion = 6.4;
 						LastSwiftMigration = 1140;
 					};
-					92D7D6271B98128D00AD9BC9 = {
-						CreatedOnToolsVersion = 6.4;
-						LastSwiftMigration = 1140;
-						TestTargetID = 92D7D6121B98128D00AD9BC9;
-					};
 				};
 			};
 			buildConfigurationList = 92D7D60E1B98128D00AD9BC9 /* Build configuration list for PBXProject "Xpandr" */;
@@ -211,12 +129,14 @@
 				Base,
 			);
 			mainGroup = 92D7D60A1B98128D00AD9BC9;
+			packageReferences = (
+				9289A2202D4A07CD00402CB9 /* XCRemoteSwiftPackageReference "DAExpandAnimation" */,
+			);
 			productRefGroup = 92D7D6141B98128D00AD9BC9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				92D7D6121B98128D00AD9BC9 /* Xpandr */,
-				92D7D6271B98128D00AD9BC9 /* XpandrTests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,13 +153,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92D7D6261B98128D00AD9BC9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -250,27 +163,10 @@
 				92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */,
 				92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */,
 				92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */,
-				92D7D63B1B98168000AD9BC9 /* DAExpandAnimation.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		92D7D6241B98128D00AD9BC9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				92D7D62F1B98128D00AD9BC9 /* XpandrTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		92D7D62A1B98128D00AD9BC9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 92D7D6121B98128D00AD9BC9 /* Xpandr */;
-			targetProxy = 92D7D6291B98128D00AD9BC9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		92D7D61C1B98128D00AD9BC9 /* Main.storyboard */ = {
@@ -440,48 +336,6 @@
 			};
 			name = Release;
 		};
-		92D7D6361B98128D00AD9BC9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = XpandrTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Xpandr.app/Xpandr";
-			};
-			name = Debug;
-		};
-		92D7D6371B98128D00AD9BC9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = XpandrTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.denisavdeev.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Xpandr.app/Xpandr";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -503,16 +357,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92D7D6351B98128D00AD9BC9 /* Build configuration list for PBXNativeTarget "XpandrTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				92D7D6361B98128D00AD9BC9 /* Debug */,
-				92D7D6371B98128D00AD9BC9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9289A2202D4A07CD00402CB9 /* XCRemoteSwiftPackageReference "DAExpandAnimation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ifitdoesntwork/DAExpandAnimation";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9289A2212D4A07CD00402CB9 /* DAExpandAnimation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9289A2202D4A07CD00402CB9 /* XCRemoteSwiftPackageReference "DAExpandAnimation" */;
+			productName = DAExpandAnimation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 92D7D60B1B98128D00AD9BC9 /* Project object */;
 }

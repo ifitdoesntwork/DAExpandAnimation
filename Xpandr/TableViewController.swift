@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 - 2021 Denis Avdeev. All rights reserved.
 //
 
+import DAExpandAnimation
 import UIKit
 
 class TableViewController: UITableViewController, UIViewControllerTransitioningDelegate {
@@ -22,17 +23,19 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
             .systemTeal,
             .systemPink
         ]
-        static let demoAnimationDuration = 1.0
+        static let demoAnimationDuration = {
+            Double.random(in: 0.1...1)
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.rowsCount
+        Constants.rowsCount
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,30 +52,27 @@ class TableViewController: UITableViewController, UIViewControllerTransitioningD
     private let animationController = DAExpandAnimation()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let toViewController = segue.destination
-        
-        if let selectedCell = sender as? UITableViewCell {
-            toViewController.transitioningDelegate = self
-            toViewController.modalPresentationStyle = .custom
-            toViewController.view.backgroundColor = selectedCell.backgroundColor
-            
-            animationController.collapsedViewFrame = {
-                return selectedCell.frame
-            }
-            animationController.animationDuration = Constants.demoAnimationDuration
-            
-            if let indexPath = tableView.indexPath(for: selectedCell) {
-                tableView.deselectRow(at: indexPath, animated: false)
-            }
+        guard let selectedCell = sender as? UITableViewCell else {
+            return
         }
+        
+        let toViewController = segue.destination
+        toViewController.transitioningDelegate = self
+        toViewController.modalPresentationStyle = .custom
+        toViewController.view.backgroundColor = selectedCell.backgroundColor
+        
+        animationController.collapsedViewFrame = {
+            selectedCell.frame
+        }
+        animationController.animationDuration = Constants.demoAnimationDuration()
     }
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return animationController
+        animationController
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return animationController
+        animationController
     }
 
 }

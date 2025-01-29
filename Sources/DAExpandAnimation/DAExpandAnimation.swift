@@ -25,11 +25,7 @@
 
 import UIKit
 
-public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning {
-    
-    private struct Constants {
-        static let systemAnimationDuration = 0.24
-    }
+public class DAExpandAnimation: NSObject {
     
     /// The delegate for adapting the presenter's view to the transition.
     public weak var presentingViewAdapter: DAExpandAnimationPresentingViewAdapter?
@@ -46,17 +42,32 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
     /// When set to `nil`, the view covers the whole window.
     public var expandedViewFrame: CGRect?
     
-    /// The total duration of the animations, measured in seconds. Set to an
-    /// approximation of the system modal view presentation duration by default.
-    public var animationDuration = Constants.systemAnimationDuration
+    /// Creates a presenter's view top or bottom sliding part
+    /// - Parameters:
+    ///   - $0:  presenter's view
+    ///   - $1:  sliding part frame, in presenter's view coordinates
+    public var slidingPart: (UIView, CGRect) -> UIView? = {
+        $0.resizableSnapshotView(
+            from: $1,
+            afterScreenUpdates: false,
+            withCapInsets: .zero
+        )
+    }
+    
+    /// The total duration of the animations, measured in seconds.
+    /// Defaults to an approximation of the system modal view presentation duration.
+    public var animationDuration = 0.24
+}
+
+extension DAExpandAnimation: UIViewControllerAnimatedTransitioning {
     
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return animationDuration
+        animationDuration
     }
     
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
-        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let fromViewController = transitionContext.viewController(forKey: .from)!
+        let toViewController = transitionContext.viewController(forKey: .to)!
         let isPresentation = toViewController.presentationController?.presentingViewController == fromViewController
         let backgroundView = (isPresentation ? fromViewController : toViewController).view!
         let frontView = (isPresentation ? toViewController : fromViewController).view!
@@ -68,7 +79,7 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
             x: backgroundView.bounds.origin.x,
             y: backgroundView.bounds.midY,
             width: backgroundView.bounds.width,
-            height: 0
+            height: .zero
         )
         if collapsedFrame.maxY < backgroundView.bounds.origin.y {
             collapsedFrame.origin.y = backgroundView.bounds.origin.y - collapsedFrame.height
@@ -85,11 +96,7 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
             width: backgroundView.bounds.width,
             height: max(collapsedFrame.origin.y, backgroundView.bounds.origin.y)
         )
-        let topSlidingView = backgroundView.resizableSnapshotView(
-            from: topSlidingViewFrame,
-            afterScreenUpdates: false,
-            withCapInsets: .zero
-        )
+        let topSlidingView = slidingPart(backgroundView, topSlidingViewFrame)
         topSlidingView?.frame = topSlidingViewFrame
         
         let bottomSlidingViewOriginY = min(collapsedFrame.maxY, backgroundView.bounds.maxY)
@@ -99,11 +106,7 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
             width: backgroundView.bounds.width,
             height: backgroundView.bounds.maxY - bottomSlidingViewOriginY
         )
-        let bottomSlidingView = backgroundView.resizableSnapshotView(
-            from: bottomSlidingViewFrame,
-            afterScreenUpdates: false,
-            withCapInsets: .zero
-        )
+        let bottomSlidingView = slidingPart(backgroundView, bottomSlidingViewFrame)
         bottomSlidingView?.frame = bottomSlidingViewFrame
         
         let topSlidingDistance = collapsedFrame.origin.y - backgroundView.bounds.origin.y
@@ -114,9 +117,9 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
         }
         topSlidingView?.frame = backgroundView.convert(topSlidingView!.frame, to: inView)
         bottomSlidingView?.frame = backgroundView.convert(bottomSlidingView!.frame, to: inView)
-        if !(presentingViewAdapter?.shouldSlideApart == false) && topSlidingView != nil && bottomSlidingView != nil {
-            inView.addSubview(topSlidingView!)
-            inView.addSubview(bottomSlidingView!)
+        if presentingViewAdapter?.shouldSlideApart != false, let topSlidingView, let bottomSlidingView {
+            inView.addSubview(topSlidingView)
+            inView.addSubview(bottomSlidingView)
         }
         
         // Add the expanding view to the scene.
@@ -168,14 +171,14 @@ public class DAExpandAnimation: NSObject, UIViewControllerAnimatedTransitioning 
 
 public protocol DAExpandAnimationPresentingViewAdapter: AnyObject {
     
-    /// A boolean value that determines whether the animations include sliding
-    /// the presenting view apart. Defaults to `true`.
+    /// Determines whether the animations include sliding the presenter's view apart.
+    /// Defaults to `true`.
     var shouldSlideApart: Bool { get }
     
-    /// Notifies the presenting view adapter that animations are about to occur.
+    /// Notifies the presenter's view adapter that animations are about to occur.
     func animationsWillBegin(in view: UIView, presenting isPresentation: Bool)
     
-    /// Notifies the presenting view adapter that animations are just completed.
+    /// Notifies the presenter's view adapter that animations are just completed.
     func animationsDidEnd(presenting isPresentation: Bool)
     
 }
@@ -212,7 +215,7 @@ public protocol DAExpandAnimationPresentedViewAdapter: AnyObject {
 
 public extension DAExpandAnimationPresentingViewAdapter {
     
-    var shouldSlideApart: Bool { return true }
+    var shouldSlideApart: Bool { true }
     func animationsWillBegin(in view: UIView, presenting isPresentation: Bool) {}
     func animationsDidEnd(presenting isPresentation: Bool) {}
     

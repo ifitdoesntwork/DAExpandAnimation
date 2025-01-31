@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		922269791DD5BA2600E90E40 /* screencapture.gif in Resources */ = {isa = PBXBuildFile; fileRef = 92D845641B98DE3800EF2E0D /* screencapture.gif */; };
 		9289A2222D4A07CD00402CB9 /* DAExpandAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 9289A2212D4A07CD00402CB9 /* DAExpandAnimation */; };
 		92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */; };
 		92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D61A1B98128D00AD9BC9 /* ViewController.swift */; };
@@ -18,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
 		92D7D6131B98128D00AD9BC9 /* Xpandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D6171B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +26,7 @@
 		92D7D61F1B98128D00AD9BC9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		92D7D6221B98128D00AD9BC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		92D7D6381B9815D100AD9BC9 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		92D845641B98DE3800EF2E0D /* screencapture.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = screencapture.gif; sourceTree = "<group>"; };
+		92D845641B98DE3800EF2E0D /* screencapture.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = screencapture.gif; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +146,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				92D7D61E1B98128D00AD9BC9 /* Main.storyboard in Resources */,
-				922269791DD5BA2600E90E40 /* screencapture.gif in Resources */,
 				92D7D6231B98128D00AD9BC9 /* LaunchScreen.xib in Resources */,
 				92D7D6201B98128D00AD9BC9 /* Images.xcassets in Resources */,
 			);

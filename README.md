@@ -2,7 +2,7 @@
 # DAExpandAnimation
 A custom modal transition that presents a controller with an expanding effect while sliding out the presenter remnants.
 # Screenshot
-![DAExpandAnimation](https://raw.githubusercontent.com/ifitdoesntwork/DAExpandAnimation/master/Xpandr/screencapture.gif)
+![DAExpandAnimation](https://raw.githubusercontent.com/ifitdoesntwork/DAExpandAnimation/master/Example/screencapture.gif)
 # Installation
 Simply copy the `Sources/DAExpandAnimation/DAExpandAnimation.swift` file into your project.
 ### Swift Package Manager

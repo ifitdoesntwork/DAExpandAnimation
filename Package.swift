@@ -20,5 +20,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "DAExpandAnimation")
-    ]
+    ],
+    swiftLanguageVersions: [.v5, .version("6")]
 )

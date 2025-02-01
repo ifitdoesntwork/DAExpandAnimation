@@ -46,7 +46,7 @@ public class DAExpandAnimation: NSObject {
     /// - Parameters:
     ///   - $0:  presenter's view
     ///   - $1:  sliding part frame, in presenter's view coordinates
-    public var slidingPart: (UIView, CGRect) -> UIView? = {
+    @MainActor public var slidingPart: (UIView, CGRect) -> UIView? = {
         $0.resizableSnapshotView(
             from: $1,
             afterScreenUpdates: false,

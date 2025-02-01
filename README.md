@@ -1,4 +1,6 @@
 [![SPM supported](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-brightgreen.svg)](https://swift.org/package-manager)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fifitdoesntwork%2FDAExpandAnimation%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/ifitdoesntwork/DAExpandAnimation)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fifitdoesntwork%2FDAExpandAnimation%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/ifitdoesntwork/DAExpandAnimation)
 # DAExpandAnimation
 A custom modal transition that presents a controller with an expanding effect while sliding out the presenter remnants.
 # Screenshot

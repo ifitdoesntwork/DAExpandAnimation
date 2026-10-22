@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9230B2E1305C34A3006ECB81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230B2E0305C34A3006ECB81 /* SceneDelegate.swift */; };
 		9289A2222D4A07CD00402CB9 /* DAExpandAnimation in Frameworks */ = {isa = PBXBuildFile; productRef = 9289A2212D4A07CD00402CB9 /* DAExpandAnimation */; };
 		92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */; };
 		92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D7D61A1B98128D00AD9BC9 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		922269781DD5B8FF00E90E40 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
+		9230B2E0305C34A3006ECB81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		92D7D6131B98128D00AD9BC9 /* Xpandr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Xpandr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92D7D6171B98128D00AD9BC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				92D7D6181B98128D00AD9BC9 /* AppDelegate.swift */,
+				9230B2E0305C34A3006ECB81 /* SceneDelegate.swift */,
 				92D7D6381B9815D100AD9BC9 /* TableViewController.swift */,
 				92D7D61A1B98128D00AD9BC9 /* ViewController.swift */,
 				92D7D61C1B98128D00AD9BC9 /* Main.storyboard */,
@@ -110,7 +113,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 2710;
 				ORGANIZATIONNAME = "Denis Avdeev";
 				TargetAttributes = {
 					92D7D6121B98128D00AD9BC9 = {
@@ -161,6 +164,7 @@
 				92D7D61B1B98128D00AD9BC9 /* ViewController.swift in Sources */,
 				92D7D6391B9815D100AD9BC9 /* TableViewController.swift in Sources */,
 				92D7D6191B98128D00AD9BC9 /* AppDelegate.swift in Sources */,
+				9230B2E1305C34A3006ECB81 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +241,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -290,7 +294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
